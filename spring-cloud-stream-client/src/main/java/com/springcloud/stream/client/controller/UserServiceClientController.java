@@ -7,6 +7,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,14 +21,14 @@ public class UserServiceClientController {
     private Source source;
 
 
-    @PostMapping("/user/message/rabbit")
+    @GetMapping("/user/message/rabbit")
     public boolean saveUserByRabbitMessage(@RequestParam String message) {
         MessageChannel messageChannel = userMessage.output();
         // 发送消息
         return messageChannel.send(new GenericMessage<String>(message));
     }
 
-    @PostMapping("/user/message/source")
+    @GetMapping("/user/message/source")
     public boolean source(@RequestParam String message) {
         MessageChannel messageChannel = source.output();
         // 发送消息

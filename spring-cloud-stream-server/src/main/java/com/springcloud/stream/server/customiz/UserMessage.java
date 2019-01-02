@@ -7,6 +7,6 @@ public interface UserMessage {
 
 
     @Input("test") // 管道名称
-    SubscribableChannel input1();
+    SubscribableChannel input();
 
 }

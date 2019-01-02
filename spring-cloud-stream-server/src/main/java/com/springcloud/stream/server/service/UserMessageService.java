@@ -17,13 +17,13 @@ import java.io.IOException;
 @Service
 public class UserMessageService {
 
+    @Autowired
+    private UserMessage userMessage;
 
-
-
-//    @ServiceActivator(inputChannel = "user-message")
-//    public void listen(java.lang.String message)  {
-//        System.out.println("Subscribe by @ServiceActivator:"+message);
-//    }
+    @ServiceActivator(inputChannel = "test")
+    public void listen(java.lang.String message)  {
+        System.out.println("Subscribe by @ServiceActivator:"+message);
+    }
 
     @StreamListener("test")
     public void onMessage(String message)  {
@@ -33,17 +33,14 @@ public class UserMessageService {
     public void input(String message)  {
         System.out.println("Subscribe by @input:"+message);
     }
-//    @StreamListener("01test")  // Spring Cloud Stream 注解驱动
-//    public void test(String message) {
-//        System.out.println("01test(String): " + message);
-//    }
 
-//
-//    @PostConstruct
-//    public void init() {
-//        SubscribableChannel subscribableChannel = userMessage.input();
-//        subscribableChannel.subscribe(message -> {
-//            System.out.println("Subscribe by SubscribableChannel:"+message);
-//        });
-//    }
+
+
+    @PostConstruct
+    public void init() {
+        SubscribableChannel subscribableChannel = userMessage.input();
+        subscribableChannel.subscribe(message -> {
+            System.out.println("Subscribe by SubscribableChannel:"+message);
+        });
+    }
 }
