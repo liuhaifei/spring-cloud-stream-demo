@@ -34,4 +34,10 @@ public class UserServiceClientController {
         // 发送消息
         return messageChannel.send(new GenericMessage<String>(message));
     }
+
+    @GetMapping("/send/http")
+    public boolean testHttp(@RequestParam String message){
+        MessageChannel messageChannel= userMessage.http();
+        return messageChannel.send(new GenericMessage("http ->send:"+message));
+    }
 }

@@ -43,4 +43,9 @@ public class UserMessageService {
             System.out.println("Subscribe by SubscribableChannel:"+message);
         });
     }
+
+    @StreamListener("http")  // Spring Cloud Stream 注解驱动
+    public void testHttp(String message) {
+        System.out.println("testHttp(String): " + message);
+    }
 }

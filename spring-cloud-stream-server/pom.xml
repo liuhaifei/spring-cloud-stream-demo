@@ -12,11 +12,11 @@
     <name>spring-cloud-stream-server</name>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.springcloud</groupId>-->
-            <!--<artifactId>spring-cloud-stream-binder-http</artifactId>-->
-            <!--<version>0.0.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.springcloud</groupId>
+            <artifactId>spring-cloud-stream-binder-http</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
 
         <!--spring cloud sream rabbit starter -->

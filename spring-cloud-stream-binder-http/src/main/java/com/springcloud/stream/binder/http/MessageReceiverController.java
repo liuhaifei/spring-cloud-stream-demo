@@ -4,6 +4,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -19,7 +20,8 @@ import java.io.InputStream;
  * @Date 2018/12/29 18:56
  * @Version 1.0
  **/
-public class MessageReceiverController  {
+@RestController
+public class MessageReceiverController implements Controller  {
     public static final String ENDPOINT_URI="/message/receive";
 
 
@@ -39,5 +41,10 @@ public class MessageReceiverController  {
 
     public void setMessageChannel(MessageChannel messageChannel) {
         this.messageChannel = messageChannel;
+    }
+
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        return null;
     }
 }

@@ -8,5 +8,8 @@ public interface UserMessage {
     @Output("test")
     MessageChannel output();
 
+    @Output("http")
+    MessageChannel http();
+
 }
 

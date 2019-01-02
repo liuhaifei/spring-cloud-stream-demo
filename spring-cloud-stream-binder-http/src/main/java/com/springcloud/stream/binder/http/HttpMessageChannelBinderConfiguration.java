@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @Version 1.0
  **/
 @Configuration
-public class RocketMQMessageChannelBinderConfiguration {
+public class HttpMessageChannelBinderConfiguration {
 
     @Bean
     public HttpMessageChannelBinder rocketMQMessageChannelBinder(

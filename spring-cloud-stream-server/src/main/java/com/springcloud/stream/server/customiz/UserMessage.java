@@ -9,4 +9,7 @@ public interface UserMessage {
     @Input("test") // 管道名称
     SubscribableChannel input();
 
+    @Input("http")  //自定义http管道
+    SubscribableChannel http();
+
 }
