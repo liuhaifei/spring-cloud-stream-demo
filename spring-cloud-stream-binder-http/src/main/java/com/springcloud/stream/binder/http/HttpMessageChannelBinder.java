@@ -24,44 +24,18 @@ import java.util.Random;
  * @ClassName HttpMessageChannelBinder
  * @Description TODO
  * @Author 刘海飞
- * @Date 2018/12/29 18:55
  * @Version 1.0
  **/
 public class HttpMessageChannelBinder implements Binder<MessageChannel, ConsumerProperties, ProducerProperties> {
 
-    private static final String TARGET_APP_NAME = "spring-cloud-server-application";
+    private static final String ROOT_URL="http://127.0.0.1:8081";
 
-
-    private DiscoveryClient discoveryClient;
     private MessageReceiverController controller;
 
-
-    private static final String NAME_ADDRESS = "localhost:9876";
-
-
-    public HttpMessageChannelBinder(DiscoveryClient discoveryClient, MessageReceiverController controller) {
-        this.discoveryClient = discoveryClient;
+    public HttpMessageChannelBinder( MessageReceiverController controller) {
         this.controller = controller;
     }
 
-    /**
-     * 随机负载
-     * @param serviceName
-     * @return
-     */
-    private ServiceInstance chooseServiceInstanceRandomly(String serviceName) {
-        List<ServiceInstance> serviceInstances = discoveryClient.getInstances(serviceName);
-        int size = serviceInstances.size();
-        int index = new Random().nextInt(size);
-        return serviceInstances.get(index);
-    }
-
-    private String getTargetRootURL(String serviceName) {
-        ServiceInstance serviceInstance = chooseServiceInstanceRandomly(serviceName);
-        return serviceInstance.isSecure() ?
-                "https://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() :
-                "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
-    }
 
     @Override
     public Binding<MessageChannel> bindConsumer(String name, String group, MessageChannel inputChannel, ConsumerProperties consumerProperties) {
@@ -83,10 +57,8 @@ public class HttpMessageChannelBinder implements Binder<MessageChannel, Consumer
         subscribableChannel.subscribe(message -> {
             //消息体
             byte[] messageBody = (byte[]) message.getPayload();
-            //对象的服务名称 ->IP:PORT
-            String rootURL = getTargetRootURL(TARGET_APP_NAME);
             //ENDPOINT URI:/message/receive
-            String targetURI = rootURL + MessageReceiverController.ENDPOINT_URI;
+            String targetURI = ROOT_URL + MessageReceiverController.ENDPOINT_URI;
             //请求实体 post
             try {
                 RequestEntity requestEntity = new RequestEntity(messageBody, HttpMethod.POST, new URI(targetURI));
