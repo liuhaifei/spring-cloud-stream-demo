@@ -21,7 +21,7 @@ import java.io.InputStream;
  * @Version 1.0
  **/
 @RestController
-public class MessageReceiverController implements Controller  {
+public class MessageReceiverController   {
     public static final String ENDPOINT_URI="/message/receive";
 
 
@@ -43,8 +43,4 @@ public class MessageReceiverController implements Controller  {
         this.messageChannel = messageChannel;
     }
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        return null;
-    }
 }

@@ -39,11 +39,8 @@ public class HttpMessageChannelBinder implements Binder<MessageChannel, Consumer
 
     @Override
     public Binding<MessageChannel> bindConsumer(String name, String group, MessageChannel inputChannel, ConsumerProperties consumerProperties) {
-
         //给controller注入 MessageChannel
         controller.setMessageChannel(inputChannel);
-
-
         return null;
     }
 
