@@ -64,22 +64,7 @@ public class HttpMessageChannelBinder implements Binder<MessageChannel, Consumer
                 e.printStackTrace();
             }
         });
-
         return null;
-    }
-
-    private byte[] serialize(Object serializable) throws IOException {
-
-        if (serializable instanceof byte[]) {
-            return (byte[]) serializable;
-        }
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        // 通过 Java 序列化 将 Object 写入字节流
-        objectOutputStream.writeObject(serializable);
-        // 返回字节数组
-        return outputStream.toByteArray();
     }
 
 }
